@@ -1,0 +1,20 @@
+#node modules take up alot of space after npm install
+node_modules
+
+
+#logs
+logs
+*.log
+npm-debug.log*
+
+# Mac related commits
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+#linux related commits
+*~
+
+#sensitive code
+.settings/
+.vscode/
