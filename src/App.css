@@ -1,0 +1,97 @@
+.App {
+  text-align: center;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #7f8c8d;
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+/* Search Bar Styles */
+.search-container {
+  margin: 20px 0;
+  width: 100%;
+}
+
+.search-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px;
+  width: 70%;
+  box-sizing: border-box;
+}
+
+.search-button {
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #3498db;
+  color: white;
+  border: 1px solid #3498db;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #2980b9;
+}
+
+/* Results area */
+.results-container {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.result-item {
+  border: 1px solid #eee;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.result-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.result-price {
+  color: #27ae60;
+  font-weight: bold;
+}
+
+.result-site {
+  color: #7f8c8d;
+  font-size: 14px;
+}
+
+.no-results {
+  text-align: center;
+  color: #7f8c8d;
+  margin-top: 30px;
+}
