@@ -6,17 +6,14 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const [featureNotification, setFeatureNotification] = useState('');
 
   const handleSearch = (searchTerm) => {
     setIsSearching(true);
     setHasSearched(true);
     
-    // eslint-disable-next-line no-console
-    console.log(`Searching for: ${searchTerm}`);
-    
     // Simulating an API call with setTimeout
     setTimeout(() => {
-      // In a real app, you would use the searchTerm to filter results
       const mockResults = [
         { id: 1, title: `${searchTerm} X`, price: "$499.99", site: "Alibaba" },
         { id: 2, title: `${searchTerm} X`, price: "$475.50", site: "eBay" },
@@ -59,9 +56,24 @@ function App() {
         </div>
       )}
       
-      <button onClick={() => alert('Feature coming soon!')}>
+      <button 
+        onClick={() => setFeatureNotification('Comparison feature coming in our next update!')}
+        aria-live="polite"
+      >
         Compare Across More Sites
       </button>
+
+      {featureNotification && (
+        <div className="feature-notification">
+          {featureNotification}
+          <button 
+            onClick={() => setFeatureNotification('')}
+            aria-label="Close notification"
+          >
+            ×
+          </button>
+        </div>
+      )}
     </div>
   );
 }
