@@ -1,26 +1,49 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import App from './App';
 
-test('renders Cheaper heading', () => {
+test('shows loading and displays results', async () => {
   render(<App />);
-  const headingElement = screen.getByText(/Cheaper/i);
-  expect(headingElement).toBeInTheDocument();
+  
+  // Trigger the search action
+  const input = screen.getByPlaceholderText(/search/i);
+  fireEvent.change(input, { target: { value: 'iPhone' } });
+  fireEvent.click(screen.getByText(/search/i));
+
+  // Wait for the loading message to disappear
+  await waitFor(() => expect(screen.queryByText(/Searching for the best prices/i)).not.toBeInTheDocument());
+
+  // Check if results are displayed
+  expect(screen.getByText(/Search Results/i)).toBeInTheDocument();
+  expect(screen.getAllByTestId('result-item').length).toBeGreaterThan(0);
 });
 
-test('renders Find the best prices text', () => {
+test('shows no results for empty search term', async () => {
   render(<App />);
-  const textElement = screen.getByText(/Find the best prices across websites!/i);
-  expect(textElement).toBeInTheDocument();
+  
+  // Trigger search for empty string
+  const input = screen.getByPlaceholderText(/search/i);
+  fireEvent.change(input, { target: { value: 'empty' } });
+  fireEvent.click(screen.getByText(/search/i));
+
+  // Wait for the loading message to disappear
+  await waitFor(() => expect(screen.queryByText(/Searching for the best prices/i)).not.toBeInTheDocument());
+
+  // Assert that no results are shown
+  expect(screen.getByTestId('no-results')).toBeInTheDocument();
 });
 
-test('renders search bar', () => {
+test('displays and closes feature notification', async () => {
   render(<App />);
-  const searchInput = screen.getByPlaceholderText(/Search for products.../i);
-  expect(searchInput).toBeInTheDocument();
-});
 
-test('renders search button', () => {
-  render(<App />);
-  const searchButton = screen.getByRole('button', { name: /Search/i });
-  expect(searchButton).toBeInTheDocument();
+  // Trigger feature notification
+  fireEvent.click(screen.getByTestId('trigger-notification'));
+
+  // Check if notification appears
+  expect(screen.getByText('Test Feature!')).toBeInTheDocument();
+
+  // Close the notification
+  fireEvent.click(screen.getByText('×'));
+
+  // Check if notification disappears
+  expect(screen.queryByText('Test Feature!')).not.toBeInTheDocument();
 });

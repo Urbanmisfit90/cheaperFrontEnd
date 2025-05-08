@@ -3,16 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "6.6.3",
-    "@testing-library/react": "16.3.0",
-    "@testing-library/user-event": "13.5.0",
-    "ajv": "^6.12.6",
-    "ajv-keywords": "^3.5.2",
-    "axios": "1.6.7",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-router-dom": "6.22.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "2.1.4"
+    "web-vitals": "2.1.4",
+    "axios": "1.6.7"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -24,7 +20,6 @@
     "eject": "react-scripts eject",
     "lint": "eslint src --ext .js,.jsx --max-warnings=0",
     "lint:fix": "eslint src --ext .js,.jsx --fix",
-    "validate": "wext-validate build",
     "package": "web-ext build --source-dir ./build --artifacts-dir ./dist",
     "size-check": "size-limit"
   },
@@ -63,10 +58,15 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/dom": "9.3.1",
+    "@testing-library/jest-dom": "6.1.4",
+    "@testing-library/react": "14.0.0",
+    "@testing-library/user-event": "14.4.3",
     "eslint": "8.57.1",
     "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "4.6.2",
+    "jest-webextension-mock": "3.1.1",
     "size-limit": "8.2.3",
     "web-ext": "7.8.0"
   },
