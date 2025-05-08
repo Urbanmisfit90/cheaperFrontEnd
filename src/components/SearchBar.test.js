@@ -1,5 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import SearchBar from './components/SearchBar';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import SearchBar from './SearchBar';
 
 test('renders search input', () => {
   render(<SearchBar onSearch={() => {}} />);
@@ -43,4 +43,23 @@ test('does not call onSearch when form is submitted with empty input', () => {
   
   // Check that onSearch was not called
   expect(mockOnSearch).not.toHaveBeenCalled();
+});
+
+test('shows no results message when "empty" is searched', async () => {
+  const mockOnSearch = jest.fn();
+  render(<SearchBar onSearch={mockOnSearch} />);
+
+  const input = screen.getByPlaceholderText(/Search for products.../i);
+  fireEvent.change(input, { target: { value: 'empty' } });
+
+  const button = screen.getByRole('button', { name: /Search/i });
+  fireEvent.click(button);
+
+  // Optionally call onSearch('empty') manually here if your component expects a prop callback
+  // mockOnSearch('empty');
+
+  // Wait for the "no results" message to appear
+  await waitFor(() => {
+    expect(screen.getByTestId('no-results')).toBeInTheDocument();
+  });
 });

@@ -18,7 +18,7 @@ function SearchBar({ onSearch }) {
           className="search-input"
           placeholder="Search for products..."
           value={searchTerm} 
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => setSearchTerm(e.target.value.trimStart())}
         />
         <button type="submit" className="search-button">
           Search
