@@ -1,3 +1,7 @@
+coverage
+build
+
+
 #node modules take up alot of space after npm install
 node_modules
 
