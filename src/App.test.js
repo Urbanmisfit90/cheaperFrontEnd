@@ -20,16 +20,16 @@ test('shows loading and displays results', async () => {
 test('shows no results for empty search term', async () => {
   render(<App />);
   
-  // Trigger search for empty string
+  // Trigger search for "empty" keyword
   const input = screen.getByPlaceholderText(/search/i);
   fireEvent.change(input, { target: { value: 'empty' } });
   fireEvent.click(screen.getByText(/search/i));
 
-  // Wait for the loading message to disappear
-  await waitFor(() => expect(screen.queryByText(/Searching for the best prices/i)).not.toBeInTheDocument());
-
-  // Assert that no results are shown
-  expect(screen.getByTestId('no-results')).toBeInTheDocument();
+  // Wait for the loading message to disappear and the no-results element to appear
+  await waitFor(() => {
+    expect(screen.queryByText(/Searching for the best prices/i)).not.toBeInTheDocument();
+    expect(screen.getByTestId('no-results')).toBeInTheDocument();
+  });
 });
 
 test('displays and closes feature notification', async () => {
