@@ -1,30 +1,28 @@
 import React, { useState } from 'react';
+//import './SearchBar.css';
 
 function SearchBar({ onSearch }) {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [input, setInput] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (searchTerm.trim()) {
-      onSearch(searchTerm);
-    }
+    // This will trigger the search even with empty input
+    onSearch(input);
   };
 
   return (
-    <div className="search-container">
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          className="search-input"
-          placeholder="Search for products..."
-          value={searchTerm} 
-          onChange={(e) => setSearchTerm(e.target.value.trimStart())}
-        />
-        <button type="submit" className="search-button">
-          Search
-        </button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit} className="search-bar">
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        placeholder="Search for products..."
+        aria-label="Search for products"
+      />
+      <button type="submit" aria-label="Search">
+        Search
+      </button>
+    </form>
   );
 }
 
