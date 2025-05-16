@@ -1,4 +1,3 @@
-/* global chrome */
 import { useState, useEffect } from 'react';
 
 const isChromeExtension = typeof chrome !== 'undefined' && 

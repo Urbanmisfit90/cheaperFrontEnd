@@ -1,5 +1,3 @@
-/* global chrome */
-
 // Function to extract product information from current page
 function extractProductInfo() {
     // Similar logic to the extractProductInfo function in api.js

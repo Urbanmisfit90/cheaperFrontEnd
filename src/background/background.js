@@ -1,4 +1,3 @@
-/* global chrome */
 // Listen for the extension installation event
 chrome.runtime.onInstalled.addListener(() => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {

@@ -1,5 +1,3 @@
-/* global chrome */
-
 // Cache for storing product search results
 const searchCache = {};
 

@@ -1,115 +1,174 @@
-.App {
-  text-align: center;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  position: relative;
-  min-height: 100vh;
+body, .App.dark {
+  background-color: #0f1115; /* Dark background */
+  color: #ffffff; /* White text */
+  font-family: 'Segoe UI', sans-serif;
 }
 
-/* Sticky Banner Styles */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #1c1e22; /* Darker header */
+}
+
+.search-bar {
+  background-color: #1f2230; /* Dark search bar */
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  color: white;
+  font-size: 1rem;
+  width: 250px;
+  /* Add a subtle border for better visibility */
+  border: 1px solid #333;
+}
+
+.main-layout {
+  display: flex;
+}
+
+.sidebar {
+  width: 220px;
+  padding: 20px;
+  background-color: #1c1e22; /* Dark sidebar */
+  border-right: 1px solid #333;
+}
+
+.checkbox-group {
+  margin-bottom: 20px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust minmax as needed */
+  gap: 20px;
+  padding: 20px;
+  flex: 1;
+  /* Remove the padding from results-container */
+  padding-bottom: 0;
+}
+
+.product-card-container { /* New container to handle hover */
+  transition: transform 0.2s;
+}
+
+.product-card-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  z-index: 10;
+}
+
+.product-card {
+  background-color: #1e2126; /* Dark card background */
+  padding: 16px;
+  border-radius: 12px;
+  text-align: left; /* Align text left */
+  cursor: pointer;
+  border: none;
+  position: relative; /* For absolute positioning of save button */
+}
+
+.product-card img {
+  width: 100%;
+  height: 150px; /* Adjust height as needed */
+  object-fit: contain;
+  margin-bottom: 10px; /* Add space below image */
+}
+
+.product-card h3 { /* Style the title */
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: white; /* White title */
+}
+
+.product-card p { /* Style the price */
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #00CED1; /* Teal/Cyan price */
+  margin-bottom: 5px;
+}
+
+.product-card span { /* Style other details */
+  color: #aaa; /* Grayish details */
+}
+
+.product-detail {
+  background-color: #1e2126; /* Dark detail background */
+  padding: 20px;
+  width: 300px;
+  margin-right: 20px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.close-detail {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  font-size: 1.2rem;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.buy-button {
+  margin-top: 10px;
+  background-color: #4c9aff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+}
+
+.description-title {
+  margin-top: 16px;
+  font-weight: bold;
+}
+
 .sticky-banner {
   position: sticky;
-  padding: 12px;
-  text-align: center;
-  z-index: 100;
-  background-color: #f8f9fa;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 1000;
+  padding: 12px 20px;
+  text-align: center; /* Center the text content */
+  background-color: #24272f;
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.95rem;
+  display: flex; /* Use flexbox for centering */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically (though less relevant here) */
 }
 
 .top-banner {
   top: 0;
-  margin: -20px -20px 20px -20px;
 }
 
 .bottom-banner {
+  position: fixed;
   bottom: 0;
-  margin: 20px -20px -20px -20px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: #24272f;
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* Keep bottom banner centered */
   align-items: center;
-}
-
-.accept-btn {
-  margin-left: 15px;
-  padding: 4px 12px;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.close-btn {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: #666;
-}
-
-/* Existing styles... */
-.search-container {
-  margin: 20px 0;
-}
-
-.loading {
-  margin: 20px 0;
-  font-style: italic;
-  color: #666;
+  padding: 12px 20px;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 
 .results-container {
-  margin-top: 30px;
+  padding-bottom: 72px; /* Adjust if your bottom banner has a different height */
 }
 
-.result-item {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 15px;
-  margin: 10px 0;
-  text-align: left;
-}
-
-.result-title {
-  font-weight: bold;
-  font-size: 1.1em;
-}
-
-.result-price {
-  color: #007bff;
-  font-size: 1.2em;
-  margin: 5px 0;
-}
-
-.result-site {
-  color: #666;
-  font-size: 0.9em;
-}
-
-.no-results {
-  margin: 20px 0;
-  color: #666;
-  font-style: italic;
-}
-
-.feature-notification {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #28a745;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-}
-
-.feature-notification button {
-  margin-left: 15px;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.2em;
-  cursor: pointer;
+@media (max-width: 600px) {
+  .compare-button{
+    width: 100%;
+  }
 }

@@ -4,9 +4,9 @@ import SearchBar from './components/SearchBar';
 import ProductCard from './components/ProductCard';
 
 // Safely check for Chrome extension API availability
-const isChromeExtension = typeof chrome !== 'undefined' && 
-                         chrome?.storage?.local && 
-                         chrome?.tabs?.create;
+const isChromeExtension = typeof chrome !== 'undefined' &&
+    chrome?.storage?.local &&
+    chrome?.tabs?.create;
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
@@ -41,7 +41,7 @@ function App() {
 
   const handleSearch = (searchTerm) => {
     const term = searchTerm.trim();
-    
+   
     // Always update search states
     setIsSearching(true);
     setHasSearched(true);
@@ -118,7 +118,7 @@ function App() {
   const handleSaveProduct = (product) => {
     const isAlreadySaved = savedProducts.some(p => p.id === product.id);
     let updatedSavedProducts;
-    
+   
     if (isAlreadySaved) {
       updatedSavedProducts = savedProducts.filter(p => p.id !== product.id);
       setFeatureNotification(`Removed ${product.title} from saved items`);
@@ -126,15 +126,15 @@ function App() {
       updatedSavedProducts = [...savedProducts, product];
       setFeatureNotification(`Saved ${product.title} for later`);
     }
-    
+   
     setSavedProducts(updatedSavedProducts);
-    
+   
     if (isChromeExtension) {
       chrome.storage.local.set({ savedProducts: updatedSavedProducts });
     } else {
       localStorage.setItem('savedProducts', JSON.stringify(updatedSavedProducts));
     }
-    
+   
     setTimeout(() => setFeatureNotification(''), 3000);
   };
 
@@ -147,15 +147,22 @@ function App() {
     }
   };
 
+    const handleCompareMore = () => {
+        //  Add your logic for "Compare Across More Sites" here.
+        alert("Comparing across more sites..."); // Placeholder
+    };
+
   return (
     <div className="App">
       {/* Top Sticky Banner */}
       <div className="sticky-banner top-banner">
-        🚀 Free shipping on all orders over $50! 🚀
+        <div className="banner-content">
+          🚀 Free shipping on all orders over $50! 🚀
+        </div>
       </div>
 
       <h1>Cheaper</h1>
-      <p>Find the best prices across websites!</p>
+      <p>Why Pay More? Let Cheaper Score! 😎</p>
 
       <SearchBar onSearch={handleSearch} />
 
@@ -173,15 +180,22 @@ function App() {
         <div className="results-container">
           <h2>Search Results</h2>
           {searchResults.length > 0 ? (
-            searchResults.map(result => (
-              <ProductCard 
-                key={result.id}
-                product={result}
-                onVisit={handleVisitSite}
-                onSave={handleSaveProduct}
-                isSaved={savedProducts.some(p => p.id === result.id)}
-              />
-            ))
+            <>
+              {searchResults.map(result => (
+                <ProductCard 
+                  key={result.id}
+                  product={result}
+                  onVisit={handleVisitSite}
+                  onSave={handleSaveProduct}
+                  isSaved={savedProducts.some(p => p.id === result.id)}
+                />
+              ))}
+              <div style={{display: 'flex', justifyContent: 'center' }}>
+                <button className="compare-button" onClick={handleCompareMore}>
+                  Compare Across More Sites
+                </button>
+              </div>
+            </>
           ) : (
             <div className="no-results" data-testid="no-results">
               No results found.
@@ -206,8 +220,10 @@ function App() {
       {/* Bottom Cookie Banner */}
       {showCookieBanner && (
         <div className="sticky-banner bottom-banner" data-testid="cookie-banner">
-          <div>
+          <span className="banner-message">
             We use cookies to improve your experience.
+          </span>
+          <div className="button-group">
             <button 
               className="accept-btn" 
               onClick={handleAcceptCookies}
@@ -215,14 +231,14 @@ function App() {
             >
               Accept
             </button>
+            <button 
+              className="decline-btn"
+              onClick={() => setShowCookieBanner(false)}
+              aria-label="Decline cookies"
+            >
+              Decline
+            </button>
           </div>
-          <button 
-            className="close-btn"
-            onClick={() => setShowCookieBanner(false)}
-            aria-label="Close cookie banner"
-          >
-            &times;
-          </button>
         </div>
       )}
 

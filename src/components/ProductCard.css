@@ -1,72 +1,68 @@
 .product-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
-    margin: 10px 0;
-    transition: box-shadow 0.3s ease;
-    position: relative;
-  }
-  
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 10px 0;
+  transition: box-shadow 0.3s ease, transform 0.2s cubic-bezier(.4,2,.6,1), z-index 0.2s;
+  position: relative;
+  overflow: visible;
+  background: #1e2126;
+}
+
+.product-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  z-index: 10;
+  transform: translateY(-4px);
+  transform-origin: center bottom;
+}
+
+.product-card.no-pop:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+  z-index: 1;
+}
+
+.product-card:last-child:hover {
+  transform-origin: bottom center;
+  transform: translateY(-4px);
+}
+
+@media (max-width: 700px) {
   .product-card:hover {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
   }
-  
-  .product-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+  .product-card:last-child:hover {
+    transform-origin: bottom center;
+    transform: translateY(-2px);
   }
-  
-  .product-title {
-    margin: 0 0 10px 0;
-    font-size: 1.1rem;
-    flex: 1;
+}
+
+/* --- Keep save button always visible on hover --- */
+.product-card:hover .save-button {
+  position: fixed;
+  bottom: 80px;      /* Adjust to match or exceed your cookie banner height */
+  right: 32px;        /* Adjust as needed for your layout */
+  z-index: 2000;
+  background: #00CED1; /* Vibrant Teal/Cyan */
+  color: #0f1115;     /* Consider a dark text color for contrast */
+  border-radius: 50%;
+  padding: 8px 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  font-size: 2rem;
+  transition: bottom 0.2s, right 0.2s, background-color 0.3s ease; /* Added transition */
+  cursor: pointer; /* Make it clear it's interactive */
+  border: none;      /* Remove default button border */
+}
+
+.product-card:hover .save-button:hover {
+  background: #20B2AA; /* Slightly darker on hover for added interaction */
+}
+
+/* Responsive: adjust for mobile if cookie banner is taller */
+@media (max-width: 600px) {
+  .product-card:hover .save-button {
+    right: 8px;
+    bottom: 110px;
+    font-size: 2.2rem;
   }
-  
-  .product-price {
-    color: #007bff;
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin: 8px 0;
-  }
-  
-  .product-site {
-    color: #666;
-    font-size: 0.9rem;
-    margin-bottom: 8px;
-  }
-  
-  .product-shipping, .product-rating {
-    font-size: 0.85rem;
-    color: #666;
-    margin-bottom: 5px;
-  }
-  
-  .save-button {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #ccc;
-    transition: color 0.2s ease;
-  }
-  
-  .save-button:hover, .save-button.saved {
-    color: #ff4081;
-  }
-  
-  .visit-button {
-    margin-top: 12px;
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .visit-button:hover {
-    background-color: #0056b3;
-  }
-  
+}
