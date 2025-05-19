@@ -217,30 +217,58 @@ function App() {
         </div>
       )}
 
-      {/* Bottom Cookie Banner */}
-      {showCookieBanner && (
-        <div className="sticky-banner bottom-banner" data-testid="cookie-banner">
-          <span className="banner-message">
-            We use cookies to improve your experience.
-          </span>
-          <div className="button-group">
-            <button 
-              className="accept-btn" 
-              onClick={handleAcceptCookies}
-              aria-label="Accept cookies"
-            >
-              Accept
-            </button>
-            <button 
-              className="decline-btn"
-              onClick={() => setShowCookieBanner(false)}
-              aria-label="Decline cookies"
-            >
-              Decline
-            </button>
-          </div>
-        </div>
-      )}
+{/* Bottom Cookie Banner */}
+{showCookieBanner && (
+  <div className="sticky-banner bottom-banner" data-testid="cookie-banner">
+    <span className="banner-message">
+      We use cookies to improve your experience.
+    </span>
+    <div className="button-group">
+      <button 
+        className="accept-btn" 
+        onClick={handleAcceptCookies}
+        aria-label="Accept cookies"
+        style={{
+          backgroundColor: '#28a745',
+          color: 'white',
+          border: 'none',
+          padding: '8px 20px',
+          borderRadius: '5px',
+          cursor: 'pointer',
+          fontSize: '0.9rem',
+          fontWeight: 500,
+          minWidth: '80px',
+          transition: 'all 0.2s ease'
+        }}
+        onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#218838'}
+        onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#28a745'}
+      >
+        Accept
+      </button>
+      <button 
+        className="decline-btn"
+        onClick={() => setShowCookieBanner(false)}
+        aria-label="Decline cookies"
+        style={{
+          backgroundColor: '#dc3545',
+          color: 'white',
+          border: 'none',
+          padding: '8px 20px',
+          borderRadius: '5px',
+          cursor: 'pointer',
+          fontSize: '0.9rem',
+          fontWeight: 500,
+          minWidth: '80px',
+          transition: 'all 0.2s ease'
+        }}
+        onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#c82333'}
+        onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#dc3545'}
+      >
+        Decline
+      </button>
+    </div>
+  </div>
+)}
 
       {isTestMode && (
         <button
