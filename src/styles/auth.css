@@ -65,41 +65,53 @@
   width: 100%;
 }
 
-/* Right-aligned mail icon inside email input */
+/* Inner wrapper for email input + icon */
+.email-field-wrapper {
+  position: relative;
+  width: 100%;
+}
+
 .email-icon-right {
   position: absolute;
   top: 50%;
   right: 0.75rem;
-  transform: translateY(-90%);
+  transform: translateY(-155%);
   height: 18px;
   width: 18px;
   color: #888;
   pointer-events: none;
 }
 
-/* Input adjusted to leave space for right-side icon */
 .login-email {
   padding-right: 2.5rem;
 }
 
-/* Container for password input and icon */
+/* Password input container — stays aligned even with error messages */
 .password-input-container {
   position: relative;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Password input with right padding */
+/* Password input with space for icon */
 .login-password {
   padding-right: 3rem;
 }
 
-/* --- Inserted snippet here --- */
-/* Small icon inside password input (like email icon) */
+.password-field-wrapper {
+  position: relative;
+  width: 100%;
+  /* ensure height equals the input's height so top:50% is stable */
+  display: block;
+}
+
+/* Visibility toggle icon — always vertically centered */
 .password-icon {
   position: absolute;
   top: 50%;
   right: 0.75rem;
-  transform: translateY(-90%);
+  transform: translateY(-85%);
   color: #888;
   cursor: pointer;
   height: 18px;
@@ -107,37 +119,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
 }
 
 .password-icon:hover {
   color: #1e293b;
 }
-/* --- end snippet --- */
 
-/* Password toggle icon button (if used anywhere) */
-.password-toggle-icon-button {
-  position: absolute;
-  right: 0.75rem;
-  top: 50%;
-  transform: translateY(-70%);
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  color: #64748b;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.125rem;
-}
-
-.password-toggle-icon-button:hover {
-  color: #1e293b;
-}
-
-.password-toggle-icon-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5);
+/* Error message with fixed height so it doesn't push the icon */
+.error-message {
+  min-height: 20px;
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: red;
 }
 
 /* Submit button */
@@ -196,8 +190,6 @@
   text-decoration: underline;
 }
 
-/* Responsive Design */
-
 /* Mobile (≤480px) */
 @media (max-width: 480px) {
   .auth-card {
@@ -216,11 +208,8 @@
     padding: 0.6rem 0.8rem;
     font-size: 0.9rem;
   }
-  .password-input-container .login-password {
+  .login-password {
     padding-right: 2.25rem;
-  }
-  .password-toggle-icon-button {
-    right: 0.6rem;
   }
   .auth-submit-button {
     font-size: 1rem;
@@ -244,6 +233,7 @@
     font-size: 0.9rem;
   }
 }
+
 
 
 

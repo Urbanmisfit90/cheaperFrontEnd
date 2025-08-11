@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Mail } from 'lucide-react'; // Retained as per your provided code
+import { Mail } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import "../../styles/auth.css";
 
 const isStrongPassword = (password) => {
-  // At least one lowercase, uppercase, digit, symbol, min 8 char
   const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,}$/;
   return regex.test(password);
 };
@@ -96,9 +95,7 @@ const SignUp = ({ onAuthSuccess }) => {
                 className="login-email"
                 required
               />
-              {errors.name && (
-                <p className="mt-1 text-sm text-red-600">{errors.name}</p>
-              )}
+              <p className="error-message">{errors.name || ""}</p>
             </div>
 
             {/* EMAIL INPUT */}
@@ -114,71 +111,69 @@ const SignUp = ({ onAuthSuccess }) => {
                 required
               />
               <Mail className="email-icon-right" />
-              {errors.email && (
-                <p className="mt-1 text-sm text-red-600">{errors.email}</p>
-              )}
+              <p className="error-message">{errors.email || ""}</p>
             </div>
 
             {/* PASSWORD INPUT */}
             <div className="password-input-container">
-              <input
-                id="signup-password"
-                name="password"
-                type={showPassword ? "text" : "password"}
-                value={formData.password}
-                onChange={handleInputChange}
-                placeholder="Password"
-                className="login-password"
-                required
-              />
-              <span
-                className="password-icon"
-                onClick={() => setShowPassword(!showPassword)}
-                role="button"
-                aria-label="Toggle password visibility"
-                tabIndex={0}
-                onKeyDown={(e) => { // Changed to explicit if statement
-                  if (e.key === 'Enter') {
-                    setShowPassword(!showPassword);
-                  }
-                }}
-              >
-                {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
-              </span>
-              {errors.password && (
-                <p className="mt-1 text-sm text-red-600">{errors.password}</p>
-              )}
+              <div className="password-field-wrapper">
+                <input
+                  id="signup-password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  placeholder="Password"
+                  className="login-password"
+                  required
+                />
+                <span
+                  className="password-icon"
+                  onClick={() => setShowPassword(!showPassword)}
+                  role="button"
+                  aria-label="Toggle password visibility"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      setShowPassword(!showPassword);
+                    }
+                  }}
+                >
+                  {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+                </span>
+              </div>
+              <p className="error-message">{errors.password || ""}</p>
             </div>
 
             {/* CONFIRM PASSWORD INPUT */}
             <div className="password-input-container">
-              <input
-                id="signup-confirm-password"
-                name="confirmPassword"
-                type={showConfirmPassword ? "text" : "password"}
-                value={formData.confirmPassword}
-                onChange={handleInputChange}
-                placeholder="Confirm Password"
-                className="login-password"
-                required
-              />
-              <span
-                className="password-icon"
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                role="button"
-                aria-label="Toggle confirm password visibility"
-                tabIndex={0}
-                onKeyDown={(e) => { // Changed to explicit if statement (Line 190 in original)
-                  if (e.key === 'Enter') {
-                    setShowConfirmPassword(!showConfirmPassword);
-                  }
-                }}
-              >
-                {showConfirmPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
-              </span>
-              {errors.confirmPassword && (
-                <p className="mt-1 text-sm text-red-600">{errors.confirmPassword}</p>
-              )}
+              <div className="password-field-wrapper">
+                <input
+                  id="signup-confirm-password"
+                  name="confirmPassword"
+                  type={showConfirmPassword ? "text" : "password"}
+                  value={formData.confirmPassword}
+                  onChange={handleInputChange}
+                  placeholder="Confirm Password"
+                  className="login-password"
+                  required
+                />
+                <span
+                  className="password-icon"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  role="button"
+                  aria-label="Toggle confirm password visibility"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      setShowConfirmPassword(!showConfirmPassword);
+                    }
+                  }}
+                >
+                  {showConfirmPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+                </span>
+              </div>
+              <p className="error-message">{errors.confirmPassword || ""}</p>
             </div>
 
             <button
@@ -209,4 +204,5 @@ const SignUp = ({ onAuthSuccess }) => {
 };
 
 export default SignUp;
+
 

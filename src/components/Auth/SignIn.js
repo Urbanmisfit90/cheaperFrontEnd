@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import "../../styles/auth.css";
 
 const isStrongPassword = (password) => {
-  // At least one lowercase, uppercase, digit, symbol, min 8 char
   const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,}$/;
   return regex.test(password);
 };
@@ -35,7 +34,7 @@ const SignIn = ({ onAuthSuccess }) => {
 
     if (!formData.password) newErrors.password = 'Password is required';
     else if (!isStrongPassword(formData.password)) {
-      newErrors.password = 
+      newErrors.password =
         'Password must be at least 8 characters, include uppercase, lowercase, number, and symbol.';
     }
 
@@ -81,39 +80,39 @@ const SignIn = ({ onAuthSuccess }) => {
                 required
               />
               <Mail className="email-icon-right" />
-              {errors.email && (
-                <p className="mt-1 text-sm text-red-600">{errors.email}</p>
-              )}
+              <p className="error-message">{errors.email || ""}</p>
             </div>
 
-            {/* PASSWORD INPUT */}
+            {/* PASSWORD INPUT (wrapped to keep icon anchored) */}
             <div className="password-input-container">
-              <input
-                id="signin-password"
-                name="password"
-                type={showPassword ? "text" : "password"}
-                value={formData.password}
-                onChange={handleInputChange}
-                placeholder="Password"
-                className="login-password"
-                required
-              />
-              <span
-                className="password-icon"
-                onClick={() => setShowPassword(!showPassword)}
-                role="button"
-                aria-label="Toggle password visibility"
-                tabIndex={0}
-                onKeyDown={(e) =>
-                  e.key === 'Enter' && setShowPassword(!showPassword)
-                }
-                data-testid="password-toggle"
-              >
-                {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
-              </span>
-              {errors.password && (
-                <p className="mt-1 text-sm text-red-600">{errors.password}</p>
-              )}
+              <div className="password-field-wrapper">
+                <input
+                  id="signin-password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  placeholder="Password"
+                  className="login-password"
+                  required
+                />
+                <span
+                  className="password-icon"
+                  onClick={() => setShowPassword(!showPassword)}
+                  role="button"
+                  aria-label="Toggle password visibility"
+                  tabIndex={0}
+                  onKeyDown={(e) =>
+                    e.key === 'Enter' && setShowPassword(!showPassword)
+                  }
+                  data-testid="password-toggle"
+                >
+                  {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+                </span>
+              </div>
+
+              {/* Error message placed outside the inner wrapper so it won't change wrapper height */}
+              <p className="error-message">{errors.password || ""}</p>
             </div>
 
             <button
